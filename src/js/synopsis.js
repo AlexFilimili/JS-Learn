@@ -285,7 +285,7 @@ massive2();
 
 /* разворачиваем массив */ 
 
-function massive3 {
+function massive3() {
     const data = [5, 10, 'Shopping', 20, 'Homework'];
     const result = [];
     let length = data.length;
@@ -299,6 +299,136 @@ function massive3 {
     console.log(result);
 }
 massive3();
+
+/* функции */
+let num7 = 7;
+function showMessege(text) {
+    console.log(text);
+    console.log(num7);
+}
+showMessege('Hi San');
+
+
+function calc(a, b) {
+    return (a + b); /* после return функция не идёт */
+}
+console.log(calc(2, 3));
+console.log(calc(12, 4));
+
+/* записываем в переменную результат функции */
+function ret() { /* function declaration, код видит с самого начала, еще до того, как до нее доходит */
+    let num = 77;
+
+    //
+
+    return num;
+}
+let anotherNum = ret();
+console.log(anotherNum);
+
+const logger = function() { /* function expansion, код видит только тогда, когда до нее доходит */
+    console.log('its a function expansion, biaaatch');
+};
+logger();
+
+/* стрелочные функции */
+const plus = (a, b) => a + b;
+plus();
+
+/* аргументы функций + return*/
+
+const usdCurr = 77;
+const eurCurr = 83;
+function convert(amount, curr) {
+    return (curr * amount); 
+}
+convert(350, usdCurr);
+convert(350, eurCurr);
+
+let promoDiscount = 0.9;
+function discount (result) {
+    console.log(result * promoDiscount);
+}
+const res = convert(350, eurCurr); /* создаем промежуточную переменную */
+discount(res);
+
+/* выводим четные до 8 */
+function test() {
+    for (i = 0; i < 11; i++) {
+        if (i % 2 === 0) {
+            console.log(i);
+        }
+        if (i === 8) return; /* в этом случае возвращается undefined, так как retur не задан */
+    }
+}
+test();
+
+/* возвращаем строку с приветствием */
+function sayHello(name) {
+    return (`Hello, ${name}`);
+}
+const userName = sayHello('Yulia');
+console.log(userName);
+
+/* возвращаем массив */
+function returnNeighboringNumbers(a) {
+    let massive = [];
+    massive[0] = a - 1;
+    massive[1] = a;
+    massive[2] = a + 1;
+
+    return massive;    
+}
+console.log(returnNeighboringNumbers(7));
+
+/* складываем числа в массив, достаем и располагаем их в строку */
+function getMathResult(a, b) {
+    let massive = [];
+    let resultString = '';
+    for (let i = 0; i < b; i++) {
+        let result = a * (i + 1);
+        massive[i] = result;        
+        if (i == b - 1) {
+            resultString += massive[i];
+        }
+        else {
+            resultString += massive[i] + '---';            
+        }    
+    }
+    if (b <= 0 || isNaN(b)) return a;
+    else return resultString;    
+}
+console.log(getMathResult(10, 5));
+
+/* методы */
+
+/* меняем регистр */
+let str = 'first pRactice';
+console.log(str.toLocaleUpperCase()); /* исходник не меняется */
+console.log(str.toLowerCase());
+console.log(str);
+
+/* ищем кусочек строки */
+const fruit = 'some fruit';
+console.log(fruit.indexOf('o')); 
+
+/* вырезаем кусочки строки */
+const logg = 'fiverr and UpWork';
+console.log(logg.slice(7, 11));
+/* или */
+console.log(logg.substring(7, 11));
+console.log(logg.substr(7, 3)); /* второй аргумент сообщает сколько символов нужно образать */
+
+/* округляем до ближайшего целого */
+const num8 = 15.4;
+console.log(Math.round(num8));
+
+/* преобразуем число из строки в числовой тип данных, округляя до ближайшего целого */
+const width = '15.4px';
+console.log(parseInt(width));
+
+const width2 = '15.4px';
+console.log(parseFloat(width2)); /* тоже самое, только не округляя */
 
 
 
