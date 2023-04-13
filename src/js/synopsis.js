@@ -406,7 +406,7 @@ console.log(getMathResult(10, 5));
 let str = 'first pRactice';
 console.log(str.toLocaleUpperCase()); /* исходник не меняется */
 console.log(str.toLowerCase());
-console.log(str);
+console.log(str);   
 
 /* ищем кусочек строки */
 const fruit = 'some fruit';
@@ -429,6 +429,428 @@ console.log(parseInt(width));
 
 const width2 = '15.4px';
 console.log(parseFloat(width2)); /* тоже самое, только не округляя */
+
+/* вычисляем площадь и объем куба */
+function lessonFunction1() {
+    function cubeArea(a) {        
+    if (Number.isInteger(a) === true && a > 0) {
+        let cubeArea = 6 * (a * a);
+        let cubeVolume = a * a * a;
+        console.log(`Объем куба: ${cubeVolume}, площадь всей поверхности: ${cubeArea}`);
+        return(`Объем куба: ${cubeVolume}, площадь всей поверхности: ${cubeArea}`);            
+    }
+    else if (a <= 0 || Number.isInteger(a) === false) { 
+        console.log('При вычислении произошла ошибка');
+        return ('При вычислении произошла ошибка');
+    }
+}
+cubeArea(5);
+}
+lessonFunction1();
+
+/* выводим номер купэ в завимости от места */
+function getCoupeNumber(seatNum) {
+    if (seatNum === 0 || seatNum > 36) alert('Таких мест в вагоне не существует');
+    else if (seatNum < 0 || isNaN(seatNum) === true || Number.isInteger(seatNum) === false) {
+        alert('Ошибка. Проверьте правильность введенного номера места');
+    }  
+    else if (seatNum > 0 && seatNum < 37) console.log(Math.ceil(seatNum / 4));
+/*     else if (seatNum <= 4) console.log(1);
+    else if (seatNum > 4 && seatNum < 9) console.log(2); 
+    else if (seatNum > 8 && seatNum < 13) console.log(3); 
+    else if (seatNum > 12 && seatNum < 17) console.log(4); 
+    else if (seatNum > 16 && seatNum < 21) console.log(5); 
+    else if (seatNum > 20 && seatNum < 25) console.log(6); 
+    else if (seatNum > 24 && seatNum < 29) console.log(7); 
+    else if (seatNum > 28 && seatNum < 33) console.log(8); 
+    else if (seatNum > 32 && seatNum < 37) console.log(9);  */
+}
+getCoupeNumber(20);
+
+/* преобразуем минуты в формат часов */
+function getTimeFromMinutes(minutes) {
+    if (Number.isInteger(minutes) === false || isNaN(minutes) === true || minutes < 0) {
+        console.log('Ошибка, проверьте данные');
+    }
+    else if (minutes >= 0 && minutes <= 600) {
+        let hour = minutes / 60;
+        let minute = minutes % 60;
+        let minRemainder = minute % 10;
+
+        if ((minutes >= 0 && minutes < 60 || minutes >= 300 && minutes < 600) && /* 0-60, 301-600 */
+        (minRemainder >= 5 || minRemainder === 0 )) {
+            console.log(`Это ${Math.floor(hour)} часов и ${minute} минут`);            
+        }
+        else if ((minutes >= 0 && minutes < 60 || minutes > 300 && minutes < 600) &&
+        (minRemainder <= 5 && minRemainder > 0)) {
+            console.log(`Это ${Math.floor(hour)} часов и ${minute} минуты`);            
+        }
+
+        else if (minutes > 119 && minutes < 300) { /* 120-299 */
+            console.log(`Это ${Math.floor(hour)} часа и ${minute} минут`);            
+        }
+        else if (minutes >= 60 && minutes < 120) { /* 119-300 */
+            console.log(`Это ${Math.floor(hour)} час и ${minute} минут`);            
+        }
+    }
+}
+getTimeFromMinutes(60);
+
+/* работаем с типами аргументов */
+function findMaxNumber(a, b, c, d) {
+    let num = Math.max(a, b, c, d);
+    if (num === Infinity || Number.isNaN(num) === true || 
+        typeof d !== 'number' || typeof c !== 'number' || typeof b !== 'number' || typeof a !== 'number' ) {
+        console.log(0);
+        return 0;
+    }
+    else {
+        console.log(num);
+        return num;
+
+    }
+}
+findMaxNumber(1, 5, '6', '10');
+
+/* callback функции, должны выполнятся в определенном порядке */
+function LearnJs(lang, callback) {
+    console.log(`i learn ${lang}`);
+    callback();
+}
+
+function done() {
+    console.log('I`ve learned this lesson');
+}
+LearnJs('JavaScript', done);
+
+/* деструктуризация объектов */
+const options = {
+    name: 'test',
+    width: 1368,
+    height: 900,
+    colors: {
+        border: 'black',
+        bg: 'red'
+    },
+    makeTest: function() { /* СОЗДАЕМ МЕТОД ВНУТРИ ОБЪЕКТА */
+        console.log('my first method');
+    } 
+};
+options.makeTest(); /* вызываем фукнцию из объекта */
+const {border, bg} = options.colors; /* вытаскиваем из вложеннго объекта значения в общий поток */
+console.log(bg + ', ' + border);
+
+console.log(options['colors']['border']); /* обращаемся к вложенному объекту */
+//удаляем ключ из объекта
+/* delete options.name;
+console.log(options); */
+let counter = 0; /* считаем сколько ключей нашли */
+for (let key in options) {    
+    if (typeof(options[key]) === 'object') {
+        for (let i in options[key]) {
+        console.log(`свойство ${key} имеет значение ${options[key][i]}` );
+        counter++;
+        }
+    }
+    else {
+        console.log(`свойство ${key} имеет значение ${options[key]}` );
+        counter++;
+    }
+}
+console.log(counter); 
+console.log(Object.keys(options).length); /* получаем количество ключей в объекте 1го уровня */
+
+const arr3 = [1, 2, 4, 6, 8];
+arr3.pop(); /* удаляет последний элемент массива */
+arr3.push(10); /* добавляет элемент в конец массива */
+arr3.forEach(function(i, item, arr3) {
+    console.log(`${i}: значение ${item} внутри массива ${arr3}`); /* перебор элементов массива методом */
+});
+
+
+console.log(arr3);
+
+for (let value of arr3) { /* перебор элементов массива */
+    console.log(value);
+}
+
+/* собираем в массив данные из строчки через определенный разделитель */
+const str2 = prompt('', '');
+const products = str2.split(', ');
+console.log(products);
+console.log(products.join('; ')); /* склеиваем обратно в строку, но через ';' */
+console.log(products.sort()); /* сортируем в алфавитном порядке СТРОКИ*/
+
+/* сортируем ЧИСЛА в массиве по возрастанию */
+const arr4 = [1, 22, 14, 6, 8];
+function compareNum(a, b) {
+    return a - b;
+}
+arr4.sort(compareNum);
+console.log(arr4);
+
+/* правильно копируем элементы объекта и сам объект */
+function copy(mainObj) {
+    let copyObj = {};
+    let key;
+    for (key in mainObj) {        
+        copyObj[key] = mainObj[key]; 
+    }
+    return copyObj;
+}
+/* ПРИМЕР */
+const numbers = {
+    a: 3,
+    b: 12,
+    c: {
+        d: 14,
+        f: 5
+    }
+};
+
+const newNumbers = copy(numbers);
+newNumbers.b = 0;
+
+console.log(newNumbers);
+console.log(numbers);
+
+const arr5 = {
+    g: 55,
+    l: 112
+};
+Object.assign(newNumbers, arr5);
+console.log(newNumbers);  /* НЕЗАВИСИМАЯ КОПИЯ ОБЪЕКТА */
+
+/* СОЗДАЕМ КЛОН ОБЪЕКТА */
+const clone = Object.assign({}, arr5);
+clone.l = 0;
+console.log(clone);
+
+/* СОЗДАЕМ КЛОН МАССИВА */
+const arr10 = [1, 33, 12, 97];
+const cloneArr10 = arr10.slice();
+cloneArr10[2] = 0;
+console.log(arr10);
+console.log(cloneArr10);
+
+/* ОБЪЕДИНЯЕМ НЕСКОЛЬКО МАССИВОВ В ОДИН */
+const video = ['youtube', 'vimeo', 'TikTok'];
+const blogs = ['wordpress', 'livejournal', 'linkdedln'];
+const internet = [...video, ...blogs, 'vk', 'facebook'];
+console.log(internet);
+
+/* РАСПРЕДЕЛЯЕМ ВХОДЯЩИЕ ДАННЫЕ ИЗ МАССИВА */
+function log(link, img, text) {
+    console.log(link);
+    console.log(img);
+    console.log(text);
+
+}
+const API = ['https', 'bg.png', 'Alexander'];
+log(...API);
+
+/* ДЕЛАЕМ КОПИЮ ОБЪЕКТА */
+const arr11 = {
+    v: 'ball',
+    z: 'pool'
+};
+const copyArr11 = {...arr11};
+console.log(copyArr11);
+
+/* ПЕРЕБИРАЕМ ОБЪЕКТ И РАСПОЛОГАЕМ ДАННЫЕ ИЗ НЕГО В СТРОКУ */
+const personalPlanPeter = {
+    name: '"Peter"',
+    age: '"29"',
+    skills: {
+        languages: ['ru', 'ua'],
+        programmingLangs: {
+            js: '20%',
+            php: '10%',
+            ruby: '30%'
+        },
+        exp: '3 month'
+    },
+    showAgeAndLangs: function() {
+        let lang = '';
+        let langPpossess;
+        let age = personalPlanPeter.age;
+        age = age.slice(1, 3);
+        for (let key in personalPlanPeter) {
+            for (let i in personalPlanPeter[key]) {
+                for (let j in personalPlanPeter[key][i]) {
+                    if (i === 'languages') {
+                        lang += personalPlanPeter.skills.languages[j] + ' ';
+                    }                   
+                }
+            }
+        }
+        langPpossess = `Мне ${age} и я владею языками: ` + lang.toLocaleUpperCase();
+        console.log(langPpossess);
+    }
+};
+personalPlanPeter.showAgeAndLangs(personalPlanPeter); /* ВЫЗЫВАЕМ МЕТОД ИЗ ОБЪЕКТА */
+
+function showProgrammingLangs() {
+    const obj = [];
+    let resultString = '';
+    for (let key in personalPlanPeter) {    
+        for (let i in personalPlanPeter[key]) {
+            for (let j in personalPlanPeter[key][i]) {
+                if (i === 'programmingLangs') {
+                    if (j === '') {
+                        console.log('');
+                    }
+                    else {                        
+                        obj[j] = `Язык ${j} изучен на ${personalPlanPeter[key][i][j]}`; 
+                        resultString += obj[j] + ' ' + '\n';
+                        
+                    }  
+                }                    
+            }                
+        }
+    }
+    console.log(resultString);       
+       
+}
+showProgrammingLangs();
+
+/* ВЫВОДИМ ЭЛЕМЕНТЫ ИЗ МАССИВА В СТРОЧКУ */
+const family = ['Peter', 'Ann', 'Alex', 'Linda'];
+function showFamily(family) {
+    let members = '';
+    let message;    
+    family.forEach(function(member) { 
+            members += ' ' + member;
+    });  
+    if (family.length === 0) {
+        message ='Семья пуста'; 
+    }
+    else {
+        message = `Семья состоит из:${members}`;
+    }     
+console.log(message); 
+} 
+showFamily(family);
+
+/* ПЕРЕБИРАЕМ МАССИВ МЕТОДОМ */
+const favoriteCities = ['liSBon', 'ROME', 'miLan', 'Dublin'];
+
+function standardizeStrings() {
+    favoriteCities.forEach(function(city) {
+        console.log(city.toLowerCase());
+    });    
+    
+}
+standardizeStrings();
+
+/* ПРЕОБРАЗУМЕМ СТРОЧКУ В ОБРАТНЫЙ ПОРЯДОК СИМВОЛОВ ЧЕРЕЗ МАССИВ */
+function reverse() {
+    const someString = 'This is some strange string';
+    if (typeof(someString)  === 'string') {
+    const empty = '';
+    let arr;
+    let arrRev;
+    let strRev = '';
+    arr = someString.split(empty);
+    arrRev = arr.reverse();
+    strRev = arrRev.join(empty);
+    console.log(strRev);
+    }    
+    else {
+        console.log('Ошибка!');
+        return('Ошибка!');   
+    }
+}
+reverse();
+
+/* ОБЪЕДИНЯЕМ МАССИВЫ И УБИРАЕМ ИЗ НИХ ЛИШНЕЕ */
+const baseCurrencies = ['USD', 'EUR'];
+const additionalCurrencies = ['UAH', 'RUB', 'CNY'];
+
+function availableCurr(arr, missingCurr) { 
+    let currList = ''; 
+    if (arr.length <= 0) {
+        console.log('Нет доступных валют');
+    }
+    else {
+        if (missingCurr === '') {
+            arr.forEach(function(curr){
+                currList += curr + '\n';
+                });
+                console.log('Доступные валюты: \n' + currList);
+        }
+        else {
+            let newArr = arr.filter(curr => curr !== missingCurr);
+            newArr.forEach(function(curr){
+                currList += curr + '\n';
+                });
+                console.log('Доступные валюты: \n' + currList);
+        }
+    }
+}
+availableCurr([...baseCurrencies, ...additionalCurrencies], );
+
+/* ПРОТОТИПНО ОРИЕНТИРОВАННОЕ НАСЛЕДОВАНИЕ */
+const learner = {
+    health: 100,
+    communication: 95,
+    sports: 100,
+    recreation: 65,
+    sex: 55,
+    settingUpComfort: function() {
+        console.log('the house is nice and clean');
+    }
+};
+
+const sasha = Object.create(learner); // ПРАВИЛЬНО СОЗДАЕМ ПРОТОТИП
+Object.setPrototypeOf(sasha, learner);
+sasha.settingUpComfort();
+
+/* РАБОТАЕМ СО ЗНАЧЕНИЯМИ МАССИВА, ВЛОЖЕННЫЕ В ОБЪЕКТ */
+const shoppingMallData = {
+    shops: [
+        {
+            width: 10,
+            length: 5
+        },
+        {
+            width: 15,
+            length: 7
+        },
+        {
+            width: 20,
+            length: 5
+        },
+        {
+            width: 8,
+            length: 10
+        }
+    ],
+    height: 5,
+    moneyPer1m3: 30,
+    budget: 50000
+};
+
+function isBudgetEnough(data) {
+
+let SquareM3AllMoney = 0;
+data.shops.forEach(shop => {
+    SquareM3AllMoney += shop.length * shop.width * data.height * data.moneyPer1m3; 
+});
+
+
+if (data.budget < SquareM3AllMoney) {
+    console.log('Бюджета недостаточно');
+}
+else if (data.budget <= SquareM3AllMoney) console.log('Бюджета достаточно');
+console.log(SquareM3AllMoney);    
+}
+isBudgetEnough(shoppingMallData);
+
+
+
+
+
 
 
 
